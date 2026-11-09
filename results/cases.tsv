@@ -1,0 +1,103 @@
+id	version	label	shell	expansions	structure	printf_hazard	stdin_blob	gitdir_label
+p01_advisory_dollar_paren	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR	pipeline	-	-	-
+p01_advisory_dollar_paren	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	04577de8b0512a0a6c6dba0b15f5b73d4132c466	-
+p02_advisory_backticks	pre	CMD_INJECTION	sh	CMDSUB_BACKTICK	pipeline	-	-	-
+p02_advisory_backticks	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	41461ee47e897980d992ee11551eda47a1b9d488	-
+p03_embedded	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR	pipeline	-	-	-
+p03_embedded	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	aa36e9b44f21bb6a4f6825d89782446b5f041eab	-
+p04_backslash_does_not_escape	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR	pipeline	backslash	-	-
+p04_backslash_does_not_escape	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	d34481339614b50522d710acd4b546146cc92e39	-
+p05_inside_param_default	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR+PARAM	pipeline	-	-	-
+p05_inside_param_default	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	2c881ad97064535cf9d48d95c7f96331cf9d3229	-
+p06_quote_break_attempt	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR	pipeline	-	-	-
+p06_quote_break_attempt	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	b7eea4ccb888d51eb2aa334e1c33a871f228f9f2	-
+p07_paren_in_quotes	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR	pipeline	-	-	-
+p07_paren_in_quotes	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	51cb80ab14d64964919d0c95d44eea4979f34ca0	-
+p08_after_newline	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR	pipeline	backslash	-	-
+p08_after_newline	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	0c6ae127664ae5508a03301fccf46343bd347c4a	-
+p09_backtick_in_backslash	pre	CMD_INJECTION	sh	CMDSUB_BACKTICK	pipeline	backslash	-	-
+p09_backtick_in_backslash	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	6a036edde3b83fa08c888547fe0fb8641285a8f3	-
+p10_nested	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR	pipeline	-	-	-
+p10_nested	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	e0e6cb2d4b485efd1113ffc8346a4a9fec67e27a	-
+d01_diff_comment_cmd	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR	pipeline	-	-	-
+d01_diff_comment_cmd	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	b5bbe6a232f462432c81f6e941b69480053faa1d	-
+d02_diff_comment_backtick_cmd	pre	CMD_INJECTION	sh	CMDSUB_BACKTICK	pipeline	-	-	-
+d02_diff_comment_backtick_cmd	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	1bc2fced56606c5cccd9b123744bb61e793cbec3	-
+d03_gitdir_vector	pre	LITERAL_OK	sh	-	pipeline	-	b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0	GITDIR_OK
+d03_gitdir_vector	post	NO_SHELL	no	-	argv:git --git-dir .git hash-object -w --stdin	-	b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0	GITDIR_ARGV
+n01_plain	pre	LITERAL_OK	sh	-	pipeline	-	95d09f2b10159347eece71399a7e2e907ea3df4f	-
+n01_plain	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	95d09f2b10159347eece71399a7e2e907ea3df4f	-
+n02_double_quotes	pre	LITERAL_OK	sh	-	pipeline	-	8880987d9f50eb9951d4f9251127a9e51ee38dc3	-
+n02_double_quotes	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	8880987d9f50eb9951d4f9251127a9e51ee38dc3	-
+n03_single_quote	pre	LITERAL_OK	sh	-	pipeline	-	2600c2f974f46513fcafb441e3ee55b9c7ea7d17	-
+n03_single_quote	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	2600c2f974f46513fcafb441e3ee55b9c7ea7d17	-
+n04_lone_dollar	pre	LITERAL_OK	sh	-	pipeline	-	6f4f765ed6998a016a32bf9b4c48b77219ef7f0a	-
+n04_lone_dollar	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	6f4f765ed6998a016a32bf9b4c48b77219ef7f0a	-
+n05_dollar_space	pre	LITERAL_OK	sh	-	pipeline	-	3db8d2ff518e9d396198fa9a8c4ee48513abfab0	-
+n05_dollar_space	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	3db8d2ff518e9d396198fa9a8c4ee48513abfab0	-
+n06_metachars_literal	pre	LITERAL_OK	sh	-	pipeline	-	6da01f04ff7dbd00ef6717e92398508072e71e69	-
+n06_metachars_literal	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	6da01f04ff7dbd00ef6717e92398508072e71e69	-
+n07_unicode	pre	LITERAL_OK	sh	-	pipeline	-	96051d5977e0c29bccf939131dc3ddb67135deed	-
+n07_unicode	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	96051d5977e0c29bccf939131dc3ddb67135deed	-
+n08_hash	pre	LITERAL_OK	sh	-	pipeline	-	a12b85fb92b7769766042a3a5230659b9f649e9d	-
+n08_hash	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	a12b85fb92b7769766042a3a5230659b9f649e9d	-
+n09_braces	pre	LITERAL_OK	sh	-	pipeline	-	c772e5bef6a8a68a2c40201e6c9ac6454264f087	-
+n09_braces	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	c772e5bef6a8a68a2c40201e6c9ac6454264f087	-
+o01_param_home	pre	PARAM_EXPANSION	sh	PARAM	pipeline	-	-	-
+o01_param_home	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	d0f2d18390a52b2b9ded64297b47233440c9bada	-
+o02_param_pid	pre	PARAM_EXPANSION	sh	PARAM	pipeline	-	-	-
+o02_param_pid	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	c6e0f350d606623390c286d59ca178d8c58ca71d	-
+o03_param_braced	pre	PARAM_EXPANSION	sh	PARAM	pipeline	-	-	-
+o03_param_braced	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	095c459d68bc571a076b7027ef20c30767ed2acc	-
+o04_param_positional	pre	PARAM_EXPANSION	sh	PARAM	pipeline	-	-	-
+o04_param_positional	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	465ec0ef71a67e67249676c70f6f997a309daaaf	-
+o05_arith	pre	ARITH_EXPANSION	sh	ARITH	pipeline	-	-	-
+o05_arith	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	5c99a279d28ef5e8ee55925463c4472d4fd45c12	-
+o06_empty_cmdsub	pre	EMPTY_CMDSUB	sh	CMDSUB_DOLLAR	pipeline	-	-	-
+o06_empty_cmdsub	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	8aef4fc87e32997e7f6a58466a95665116f40464	-
+o07_printf_percent	pre	PRINTF_FORMAT	sh	-	pipeline	percent	-	-
+o07_printf_percent	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	95bc7504ac6e0348634b5d604c812262642463be	-
+o08_printf_newline	pre	PRINTF_FORMAT	sh	-	pipeline	backslash	-	-
+o08_printf_newline	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	0a207c060e61f3b88eaee0a8cd0696f46fb155eb	-
+o09_printf_tab	pre	PRINTF_FORMAT	sh	-	pipeline	backslash	-	-
+o09_printf_tab	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	b78059d749b25a2e6deead9d1145a0fbaf2960cb	-
+o10_printf_backslash	pre	PRINTF_FORMAT	sh	-	pipeline	backslash	-	-
+o10_printf_backslash	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	2876d285fafadc82d50b4af37e57df9546abf4b0	-
+o11_printf_leading_dash	pre	PRINTF_FORMAT	sh	-	pipeline	leading_dash	-	-
+o11_printf_leading_dash	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	b5a90b6b575b2d2290598157adafb2d980578e1d	-
+a01_unterminated_cmdsub	pre	SYNTAX_ERROR	sh	CMDSUB_DOLLAR	error	-	-	-
+a01_unterminated_cmdsub	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	e850432302643251b363627a475818ede7bc06ab	-
+a02_unterminated_backtick	pre	SYNTAX_ERROR	sh	CMDSUB_BACKTICK	error	-	-	-
+a02_unterminated_backtick	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	bd79b97134c3712aac4ecd8e714aa1b4a2b17289	-
+a03_comment_eats_paren	pre	SYNTAX_ERROR	sh	CMDSUB_DOLLAR	error	-	-	-
+a03_comment_eats_paren	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	d18eef1a41c85d89021e5e175234d92cd4da63aa	-
+a04_unterminated_brace	pre	SYNTAX_ERROR	sh	PARAM	error	-	-	-
+a04_unterminated_brace	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	d2117dbc09aa419f6dd9051ad4517e83a4f7dc19	-
+a05_unterminated_arith	pre	SYNTAX_ERROR	sh	ARITH	error	-	-	-
+a05_unterminated_arith	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	1d23d2f585b119eb8e6b8de88991048450dbb733	-
+a06_empty_list_operator	pre	SYNTAX_ERROR	sh	CMDSUB_DOLLAR	error	-	-	-
+a06_empty_list_operator	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	6872ae532e1879cdece72cb5fe844e8ff41ce4bc	-
+a07_lone_surrogate	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR	pipeline	-	-	-
+a07_lone_surrogate	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	1d835080058af8318ee4f415b4ba9ff3b1120720	-
+a08_nul	pre	PRINTF_FORMAT	sh	-	pipeline	backslash	-	-
+a08_nul	post	NO_SHELL	no	-	argv:git hash-object -w --stdin	-	f76dd238ade08917e6712764a16a22005a50573d	-
+a09_too_long	pre	BAD_INPUT	-	-	-	-	-	-
+a09_too_long	post	BAD_INPUT	-	-	-	-	-	-
+a10_gitdir_semicolon	pre	LITERAL_OK	sh	-	changed	-	-	GITDIR_CMD_INJECTION
+a10_gitdir_semicolon	post	NO_SHELL	no	-	argv:git --git-dir x;id hash-object -w --stdin	-	b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0	GITDIR_ARGV
+a11_gitdir_cmdsub	pre	LITERAL_OK	sh	-	pipeline	-	b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0	GITDIR_CMD_INJECTION
+a11_gitdir_cmdsub	post	NO_SHELL	no	-	argv:git --git-dir $(id) hash-object -w --stdin	-	b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0	GITDIR_ARGV
+a12_gitdir_space	pre	LITERAL_OK	sh	-	changed	-	-	GITDIR_ARGV_CHANGED
+a12_gitdir_space	post	NO_SHELL	no	-	argv:git --git-dir a b hash-object -w --stdin	-	b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0	GITDIR_ARGV
+a13_gitdir_redirect	pre	LITERAL_OK	sh	-	changed	-	-	GITDIR_REDIRECT
+a13_gitdir_redirect	post	NO_SHELL	no	-	argv:git --git-dir x>y hash-object -w --stdin	-	b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0	GITDIR_ARGV
+a14_gitdir_comment	pre	LITERAL_OK	sh	-	changed	-	-	GITDIR_ARGV_CHANGED
+a14_gitdir_comment	post	NO_SHELL	no	-	argv:git --git-dir #x hash-object -w --stdin	-	b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0	GITDIR_ARGV
+a15_gitdir_param	pre	LITERAL_OK	sh	-	pipeline	-	b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0	GITDIR_EXPANSION
+a15_gitdir_param	post	NO_SHELL	no	-	argv:git --git-dir $HOME hash-object -w --stdin	-	b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0	GITDIR_ARGV
+a16_gitdir_quote	pre	BAD_INPUT	-	-	-	-	-	-
+a16_gitdir_quote	post	BAD_INPUT	-	-	-	-	-	-
+a17_gitdir_empty	pre	BAD_INPUT	-	-	-	-	-	-
+a17_gitdir_empty	post	BAD_INPUT	-	-	-	-	-	-
+a18_both	pre	CMD_INJECTION	sh	CMDSUB_DOLLAR	changed	-	-	GITDIR_CMD_INJECTION
+a18_both	post	NO_SHELL	no	-	argv:git --git-dir x;id hash-object -w --stdin	-	04577de8b0512a0a6c6dba0b15f5b73d4132c466	GITDIR_ARGV

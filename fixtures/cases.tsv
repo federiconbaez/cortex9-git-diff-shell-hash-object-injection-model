@@ -1,0 +1,54 @@
+# id	input string (JSON)	gitDir (JSON or -)
+# Hand-derived. p* positives (advisory/diff wording); d* from diff lines; n* negatives;
+# o* other shell/printf effects (not command execution); a* adversarial.
+p01_advisory_dollar_paren	"$(id)"	-
+p02_advisory_backticks	"`id`"	-
+p03_embedded	"before $(uname) after"	-
+p04_backslash_does_not_escape	"\\$(id)"	-
+p05_inside_param_default	"${x:-$(id)}"	-
+p06_quote_break_attempt	"\"; $(id) #"	-
+p07_paren_in_quotes	"$(echo \")\")"	-
+p08_after_newline	"line1\n$(id)"	-
+p09_backtick_in_backslash	"\\`id`"	-
+p10_nested	"$(echo $(id))"	-
+d01_diff_comment_cmd	"$(cmd)"	-
+d02_diff_comment_backtick_cmd	"`cmd`"	-
+d03_gitdir_vector	"hello"	".git"
+n01_plain	"hello world"	-
+n02_double_quotes	"\"quoted\""	-
+n03_single_quote	"it's"	-
+n04_lone_dollar	"$"	-
+n05_dollar_space	"$ 5"	-
+n06_metachars_literal	"; | & > < ( )"	-
+n07_unicode	"\u00f1and\u00fa"	-
+n08_hash	"#comment"	-
+n09_braces	"{a}"	-
+o01_param_home	"$HOME"	-
+o02_param_pid	"$$"	-
+o03_param_braced	"${PATH}"	-
+o04_param_positional	"$1"	-
+o05_arith	"$((6*7))"	-
+o06_empty_cmdsub	"$()"	-
+o07_printf_percent	"100%"	-
+o08_printf_newline	"a\nb"	-
+o09_printf_tab	"tab\there"	-
+o10_printf_backslash	"back\\slash"	-
+o11_printf_leading_dash	"-v"	-
+a01_unterminated_cmdsub	"$(id"	-
+a02_unterminated_backtick	"`id"	-
+a03_comment_eats_paren	"$(#)"	-
+a04_unterminated_brace	"${x"	-
+a05_unterminated_arith	"$((1"	-
+a06_empty_list_operator	"$(;)"	-
+a07_lone_surrogate	"\ud800$(id)"	-
+a08_nul	"\u0000"	-
+a09_too_long	"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"	-
+a10_gitdir_semicolon	"hello"	"x;id"
+a11_gitdir_cmdsub	"hello"	"$(id)"
+a12_gitdir_space	"hello"	"a b"
+a13_gitdir_redirect	"hello"	"x>y"
+a14_gitdir_comment	"hello"	"#x"
+a15_gitdir_param	"hello"	"$HOME"
+a16_gitdir_quote	"hello"	"bad'q"
+a17_gitdir_empty	"hello"	""
+a18_both	"$(id)"	"x;id"

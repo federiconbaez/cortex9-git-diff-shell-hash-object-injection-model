@@ -1,0 +1,28 @@
+name: ci
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Tests (stdlib only, no network; any skip fails the job)
+        run: python tests/run.py
+      - name: Independent expectations still match the committed fixtures
+        run: python scripts/derive_expected.py | diff - fixtures/expected.tsv
+      - name: Independent sweep still matches the committed results
+        run: python scripts/derive_expected.py sweep | diff - results/sweep.tsv
+      - name: Regenerate results twice and compare with committed artifacts
+        run: |
+          PYTHONPATH=src python -m gitdiff_model results fixtures/cases.tsv /tmp/r1
+          PYTHONPATH=src python -m gitdiff_model results fixtures/cases.tsv /tmp/r2
+          diff -r /tmp/r1 /tmp/r2
+          diff -r results /tmp/r1
+          cd results && sha256sum -c SHA256SUMS
